@@ -101,30 +101,31 @@ class App extends React.Component {
             }
           break;
         case 2:
-          this.setState({Player : 1});
-            if(odp.Hit == 0){
-              document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "blue";
-            }
-            else{
-              document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "black";
-            }
+            this.setState({Player : 1});
+              if(odp.Hit == 0){
+                document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "blue";
+              }
+              else{
+                document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "black";
+              }
           break;
         case 3:
-          clearInterval(this.interval);
-          if(this.state.Player = 1){
-            document.getElementById("player2").childNodes[odp.Field].style.backgroundColor = "black";
-          }
-          else{
-            document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "black";
-          }
-      
-          this.setState({ Action: "Start" });
-          this.setState({ GameStatus: 2 });
-          this.setState({ Pause: false });
-          this.setState({ Status: "Win player number "  + this.state.Player});
-        break;
-      case -1:
-        break;
+            clearInterval(this.interval);
+
+              if(this.state.Player = 1){
+                document.getElementById("player2").childNodes[odp.Field].style.backgroundColor = "black";
+              }
+              else{
+                document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "black";
+              }
+        
+            this.setState({ Action: "Start" });
+            this.setState({ GameStatus: 2 });
+            this.setState({ Pause: false });
+            this.setState({ Status: "Win player number "  + this.state.Player});
+          break;
+        case -1:
+          break;
       }
     }
   }
