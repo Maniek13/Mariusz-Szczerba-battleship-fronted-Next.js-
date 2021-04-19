@@ -1,0 +1,68 @@
+.board {
+    width: 500px;
+    height: 500px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    float: left;
+    border: 1px ridge rgb(104, 103, 103);
+}
+
+.board div{
+    position: relative;
+    width: 10%;
+    height: 10%;
+    border: 1px ridge rgb(104, 103, 103);
+    background-color: rgb(233, 233, 233) ;
+    box-sizing: border-box;
+    float: left;
+}
+
+.status{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0px 20px 0px;
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.start{
+    width: 200px;
+    height: 50px;
+    display: block;
+    clear: both;
+    margin: auto;
+    background-color: rgb(20, 151, 27);
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    border: 0px;
+    border-radius: 15px;
+}
+
+.conteinerBoard{
+    width: 1044px;
+    margin-left: calc((100% - 1020px) /2);
+    height: 100%;
+}
+
+.conteinerButton{
+    position: relative;
+    width: 100%;
+}
+
+@media only screen and (max-width: 1100px) {
+    .board {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .conteinerBoard{
+        width: 524px;
+        margin-left: calc((100% - 510px) /2);
+    }
+}
+
+
+
+
