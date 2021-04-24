@@ -29,7 +29,7 @@ class App extends React.Component {
     }
     else{
       if(this.interval == false){
-        this.interval = setInterval(() => this.game(), 10);
+        this.interval = setInterval(() => this.game(), 500);
       } 
     }
   }
@@ -79,7 +79,7 @@ class App extends React.Component {
         }
       }
 
-    this.interval = setInterval(() => this.game(), 10);
+    this.interval = setInterval(() => this.game(), 500);
     this.setState({Status : "The game will start in a moment"});
   }
 
@@ -147,7 +147,7 @@ class App extends React.Component {
             this.setState({ GameStatus: 2 });
             this.setState({ Pause: false });
             this.setState({ Status: "Server return: 'To long time to wait for move'. Please start again."});
-            break;
+          break;
         case -1:
           break;
       }
