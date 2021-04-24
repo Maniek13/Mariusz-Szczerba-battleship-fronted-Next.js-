@@ -13,7 +13,8 @@ class App extends React.Component {
       Action: "Start",
       Pause: false,
       GameId: 0,
-      Player: 1
+      Player: 1,
+      Next: true
     };
     this.board1 = [];
     this.board2 = [];
@@ -78,17 +79,34 @@ class App extends React.Component {
         }
       }
 
-    this.interval = setInterval(() => this.game(), 1000);
+    this.interval = setInterval(() => this.game(), 50);
     this.setState({Status : "The game will start in a moment"});
   }
 
   async game(){
+    var odp;
+
     if(this.state.Pause != true)
     this.setState({Status : "Player " + this.state.Player + " move"});
 
+
     if(this.state.Pause != true){
-      const res = await fetch('https://localhost:44307/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player);
-      const odp = await res.json();
+      if(this.state.Next == true){
+        const res = await fetch('https://localhost:44307/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player + '&next=false');
+        const reply = await res.json();
+        odp = reply;
+        this.setState({Next : false});
+      }
+      else{
+        const res = await fetch('https://localhost:44307/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player + '&next=true');
+        const reply = await res.json();
+        odp = reply;
+        if(reply.Message == 4){
+          this.setState({Next : true})
+        }
+      }
+     
+      console.log(odp.Message + " : " + odp.Field);
 
       switch(Number(odp.Message)){
         case 1:
@@ -112,7 +130,7 @@ class App extends React.Component {
         case 3:
             clearInterval(this.interval);
 
-              if(this.state.Player = 1){
+              if(this.state.Player == 1){
                 document.getElementById("player2").childNodes[odp.Field].style.backgroundColor = "black";
               }
               else{
@@ -123,6 +141,8 @@ class App extends React.Component {
             this.setState({ GameStatus: 2 });
             this.setState({ Pause: false });
             this.setState({ Status: "Win player number "  + this.state.Player});
+          break;
+        case 4:
           break;
         case -1:
           break;
