@@ -51,7 +51,7 @@ class App extends React.Component {
       case 2:
           this.strips();
           this.setState({ GameStatus: 3 });
-          this.setState({ Action: "Pause" });
+          this.setState({ Action: "Loading..." });
           this.setState({ Pause: false });
           break;
       case 3:
@@ -82,6 +82,7 @@ class App extends React.Component {
       }
     this.setState({Status : "The game will start in a moment"});
     this.setState({ GameStatus: 1 });
+    this.setState({ Action: "Pause" });
     this.interval = setInterval(() => this.game(),10);
   }
 
