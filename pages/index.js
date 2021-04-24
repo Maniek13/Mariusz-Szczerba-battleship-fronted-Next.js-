@@ -29,7 +29,7 @@ class App extends React.Component {
     }
     else{
       if(this.interval == false){
-        this.interval = setInterval(() => this.game(), 1000);
+        this.interval = setInterval(() => this.game(), 10);
       } 
     }
   }
@@ -79,7 +79,7 @@ class App extends React.Component {
         }
       }
 
-    this.interval = setInterval(() => this.game(), 50);
+    this.interval = setInterval(() => this.game(), 10);
     this.setState({Status : "The game will start in a moment"});
   }
 
@@ -106,7 +106,6 @@ class App extends React.Component {
         }
       }
      
-      console.log(odp.Message + " : " + odp.Field);
 
       switch(Number(odp.Message)){
         case 1:
