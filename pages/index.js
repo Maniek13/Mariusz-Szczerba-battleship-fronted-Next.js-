@@ -29,7 +29,7 @@ class App extends React.Component {
     }
     else{
       if(this.interval == false){
-        this.interval = setInterval(() => this.game(), 500);
+        this.interval = setInterval(() => this.game(), 10);
       } 
     }
   }
@@ -50,10 +50,13 @@ class App extends React.Component {
         break;
       case 2:
           this.strips();
-          this.setState({ GameStatus: 1 });
+          this.setState({ GameStatus: 3 });
           this.setState({ Action: "Pause" });
           this.setState({ Pause: false });
-        break
+          break;
+      case 3:
+
+        break;
     }
   }
 
@@ -61,7 +64,6 @@ class App extends React.Component {
     this.setState({Status : "Loading..."})
     const res = await fetch('https://localhost:44307/battleship/ships');
     const odp = await res.json();
-  
     this.setState({ GameId: odp.GameId });
       for(let i = 0; i<100; ++i){
         if(odp.StripP1[i] != 0){
@@ -79,7 +81,8 @@ class App extends React.Component {
         }
       }
     this.setState({Status : "The game will start in a moment"});
-    this.interval = setInterval(() => this.game(), 500);
+    this.setState({ GameStatus: 1 });
+    this.interval = setInterval(() => this.game(),10);
   }
 
   async game(){
