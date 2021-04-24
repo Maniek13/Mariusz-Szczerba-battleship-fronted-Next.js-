@@ -78,9 +78,8 @@ class App extends React.Component {
           document.getElementById("player2").childNodes[i].style.backgroundColor = 'rgb(233, 233, 233)';
         }
       }
-
-    this.interval = setInterval(() => this.game(), 500);
     this.setState({Status : "The game will start in a moment"});
+    this.interval = setInterval(() => this.game(), 500);
   }
 
   async game(){
