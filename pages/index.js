@@ -89,7 +89,6 @@ class App extends React.Component {
     if(this.state.Pause != true)
     this.setState({Status : "Player " + this.state.Player + " move"});
 
-
     if(this.state.Pause != true){
       if(this.state.Next == true){
         const res = await fetch('https://localhost:44307/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player + '&next=false');
@@ -105,7 +104,6 @@ class App extends React.Component {
           this.setState({Next : true})
         }
       }
-     
 
       switch(Number(odp.Message)){
         case 1:
@@ -143,6 +141,13 @@ class App extends React.Component {
           break;
         case 4:
           break;
+        case 5:
+            clearInterval(this.interval);
+            this.setState({ Action: "Start" });
+            this.setState({ GameStatus: 2 });
+            this.setState({ Pause: false });
+            this.setState({ Status: "Server return: 'To long time to wait for move'. Please start again."});
+            break;
         case -1:
           break;
       }
