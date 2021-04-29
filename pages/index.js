@@ -62,18 +62,19 @@ class App extends React.Component {
 
   async strips(){
     this.setState({Status : "Loading..."})
-    const res = await fetch('https://localhost:44307/battleship/ships');
+    const res = await fetch('https://localhost:44398/battleship/ships');
     const odp = await res.json();
-    this.setState({ GameId: odp.GameId });
+    
+    this.setState({ GameId: odp.gameId });
       for(let i = 0; i<100; ++i){
-        if(odp.StripP1[i] != 0){
+        if(odp.stripP1[i] != 0){
           document.getElementById("player1").childNodes[i].style.backgroundColor = "red";
         }
         else{
           document.getElementById("player1").childNodes[i].style.backgroundColor = 'rgb(233, 233, 233)';
         }
 
-        if(odp.StripP2[i] != 0){
+        if(odp.stripP2[i] != 0){
           document.getElementById("player2").childNodes[i].style.backgroundColor = "red";
         }
         else{
@@ -94,47 +95,47 @@ class App extends React.Component {
 
     if(this.state.Pause != true){
       if(this.state.Next == true){
-        const res = await fetch('https://localhost:44307/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player + '&next=false');
+        const res = await fetch('https://localhost:44398/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player + '&next=false');
         const reply = await res.json();
         odp = reply;
         this.setState({Next : false});
       }
       else{
-        const res = await fetch('https://localhost:44307/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player + '&next=true');
+        const res = await fetch('https://localhost:44398/battleship/moves?gameId=' + this.state.GameId + '&player=' + this.state.Player + '&next=true');
         const reply = await res.json();
         odp = reply;
-        if(reply.Message == 4){
+        if(odp.message == 4){
           this.setState({Next : true})
         }
       }
 
-      switch(Number(odp.Message)){
+      switch(Number(odp.message)){
         case 1:
             this.setState({Player : 2});
-            if(odp.Hit == 0){
-              document.getElementById("player2").childNodes[odp.Field].style.backgroundColor = "blue";
+            if(odp.hit == 0){
+              document.getElementById("player2").childNodes[odp.field].style.backgroundColor = "blue";
             }
             else{
-              document.getElementById("player2").childNodes[odp.Field].style.backgroundColor = "black";
+              document.getElementById("player2").childNodes[odp.field].style.backgroundColor = "black";
             }
           break;
         case 2:
             this.setState({Player : 1});
-              if(odp.Hit == 0){
-                document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "blue";
+              if(odp.hit == 0){
+                document.getElementById("player1").childNodes[odp.field].style.backgroundColor = "blue";
               }
               else{
-                document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "black";
+                document.getElementById("player1").childNodes[odp.field].style.backgroundColor = "black";
               }
           break;
         case 3:
             clearInterval(this.interval);
 
               if(this.state.Player == 1){
-                document.getElementById("player2").childNodes[odp.Field].style.backgroundColor = "black";
+                document.getElementById("player2").childNodes[odp.field].style.backgroundColor = "black";
               }
               else{
-                document.getElementById("player1").childNodes[odp.Field].style.backgroundColor = "black";
+                document.getElementById("player1").childNodes[odp.field].style.backgroundColor = "black";
               }
         
             this.setState({ Action: "Start" });
